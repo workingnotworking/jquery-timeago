@@ -139,11 +139,11 @@
   // init is default when no action is given
   // functions are called with context of a single element
   var functions = {
-    init: function() {
+    init: function(options) {
       functions.dispose.call(this);
       var refresh_el = $.proxy(refresh, this);
       refresh_el();
-      var $s = $t.settings;
+      var $s = $.extend(true, $t.settings, options.settings || {});
       if ($s.refreshMillis > 0) {
         this._timeagoInterval = setInterval(refresh_el, $s.refreshMillis);
       }
